@@ -3,6 +3,42 @@ using System.Xml.Schema;
 
 namespace ConsoleApp5
 {
+    #region Enum 
+    // 0 -> 255
+    enum Seasons
+    {
+        Spring,
+        Winter,
+        Summer,
+        Autumn
+    }
+    enum WeekDays
+    {
+        Saturday = 10,
+        Sunday,
+        Monday,
+        Tuesday,
+
+    }
+    enum Gender
+    {
+        M = 1,
+        F = 2,
+        Male = 1,
+        Female = 2
+    }
+
+    // Permession -> Read, Write, Execute, Delete
+    [Flags]
+    enum Permession
+    {
+        Read = 8, //000
+        Write = 4,
+        Execute = 2,
+        Delete =1 // 011
+    }
+  
+    #endregion
     internal class Program
     {
         //static void DoSomeCode()
@@ -49,6 +85,7 @@ namespace ConsoleApp5
         //    int[] arr = { 1, 2, 3 };
         //    arr[99] = 100;
         //}
+  
         static void Main(string[] args)
         {
             #region Boxing and UnBoxing
@@ -199,7 +236,42 @@ namespace ConsoleApp5
             // 3. properties 
             // 4. Events
             #endregion
-           
+
+            #region Enum
+            // enum => value type => stack
+            //Seasons S01 = Seasons.Spring;
+            //Console.WriteLine(S01);
+            //// CLR => represent enum as integer values in memory
+            //WeekDays W01 = WeekDays.Saturday;
+            //Console.WriteLine((int)S01); // 10
+            //Gender G01 = (Gender)1;
+            //Console.WriteLine(G01);
+            ////Gender G02 = (Gender)Enum.Parse(typeof(Gender), Console.ReadLine(), true);
+            ////Console.WriteLine(G02);
+            //Gender G02;
+            //Enum.TryParse(typeof(Gender), Console.ReadLine(), true,out object O1);
+            //G02 =(Gender) O1;
+            //Console.WriteLine(G02);
+
+            Permession P1 = Permession.Read;
+            //Permession += Permession.Delete:; XXX
+            //P1 ^= Permession.Delete; // toggle 
+            //P1 |= Permession.Delete; // add permession
+            //Console.WriteLine(P1); // read
+            P1 &= ~(Permession.Delete); // not delete
+            // -> check permession 
+            if((P1&Permession.Delete) == Permession.Delete)
+            {
+                Console.WriteLine("Exsist");
+            }
+            else
+            {
+                Console.WriteLine("not exist");
+
+            }
+
+            #endregion
+
         }
     }
 }
